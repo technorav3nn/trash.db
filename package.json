@@ -1,0 +1,20 @@
+{
+  "name": "trashdb",
+  "version": "1.0.0",
+  "description": "garbage json db",
+  "main": "index.ts",
+  "scripts": {
+    "start": "nodemon --exec 'ts-node index.ts localhost 8080",
+    "ts" : "ts-node index.ts"
+  },
+  "dependencies": {
+    "@types/node": "14.14.29",
+    "ts-node": "9.1.1",
+    "typescript": "4.1.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.6",
+    "nodemon": "1.18.4"
+  },
+  "keywords": []
+}
