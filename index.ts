@@ -1,10 +1,10 @@
 import * as fs from "fs";
 
-interface JSONOpts {
+export interface JSONOpts {
   fileName: string;
 }
 
-const jsonVal = function (fileContent) {
+export const jsonVal = function (fileContent) {
   try {
     JSON.parse(fileContent);
   } catch (e) {
@@ -13,7 +13,7 @@ const jsonVal = function (fileContent) {
   return true;
 };
 
-class TrashDb {
+export default class TrashDb {
   public options: object;
   public file: any;
   public fileName: string;
@@ -33,7 +33,7 @@ class TrashDb {
     if (!this.dataStorage[key]) {
       const data = this.dataStorage;
       data[key] = value;
-      fs.writeFileSync("test.json", JSON.stringify(data));
+      fs.writeFileSync(this.fileName, JSON.stringify(data));
       return data[key];
     }
     this.dataStorage[key] = value;
@@ -41,7 +41,7 @@ class TrashDb {
   }
   public delete(key: string) {
     delete this.dataStorage[key]
-    fs.writeFileSync("test.json", JSON.stringify(this.dataStorage));
+    fs.writeFileSync(this.fileName, JSON.stringify(this.dataStorage));
     console.log(this.dataStorage);
 
   }
@@ -49,7 +49,7 @@ class TrashDb {
     for(const item in this.dataStorage) {
       delete this.dataStorage[item];
     }
-    fs.writeFileSync("test.json", JSON.stringify(this.dataStorage));
+    fs.writeFileSync(this.fileName, JSON.stringify(this.dataStorage));
   }
   public get(key: string) {
     return this.dataStorage[key] ?? null;
@@ -59,5 +59,3 @@ class TrashDb {
   }
 }
 
-const db = new TrashDb({ fileName: "test.json" });
-db.deleteAll()
