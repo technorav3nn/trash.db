@@ -22,14 +22,13 @@ export default class TrashDb {
   constructor(options: JSONOpts) {
     this.options = options;
     this.fileName = options.fileName;
-    let fileData;
-    fileData = fs.readFileSync(__dirname + "/" + options.fileName, "utf8");
+    let fileData = fs.readFileSync(__dirname + "/" + options.fileName, "utf8");
     if (!options.fileName.endsWith(".json")) {
       throw new Error("trash.db - you need a .json file format.");
     }
     if (jsonVal(fileData)) this.dataStorage = JSON.parse(fileData);
   }
-  public set(key: any, value: any) {
+  public set(key: string, value: any) {
     if (!this.dataStorage[key]) {
       const data = this.dataStorage;
       data[key] = value;
@@ -42,8 +41,6 @@ export default class TrashDb {
   public delete(key: string) {
     delete this.dataStorage[key]
     fs.writeFileSync(this.fileName, JSON.stringify(this.dataStorage));
-    console.log(this.dataStorage);
-
   }
   public deleteAll() {
     for(const item in this.dataStorage) {
