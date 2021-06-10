@@ -4,7 +4,6 @@
   "description": "garbage json db",
   "main": "index.ts",
   "scripts": {
-    "start": "nodemon --exec 'ts-node index.ts localhost 8080",
     "ts" : "ts-node index.ts"
   },
   "dependencies": {
